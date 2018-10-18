@@ -6,15 +6,19 @@
             </van-col>
             <van-col>
                 <van-button type="primary" @click="gameStatr">开始</van-button>
+                <van-button type="primary" @click="clickEvent(1)">up</van-button>
+                <van-button type="primary" @click="clickEvent(2)">down</van-button>
+                <van-button type="primary" @click="clickEvent(3)">left</van-button>
+                <van-button type="primary" @click="clickEvent(4)">right</van-button>
             </van-col>
         </van-row>
         <div class="span-line van-hairline--bottom"></div>
         <div class="game-box">
-            <div v-for="(row,rowIdx) in gameList" :key="rowIdx">
-                <div class="box" v-for="(col,colIdx) in row" :key="colIdx">
-                    {{col}}
-                </div>
-            </div>
+            <van-row v-for="(row,rowIdx) in gameList" :key="rowIdx">
+                <van-col class="box van-hairline--right van-hairline--bottom" v-for="(col,colIdx) in row" :key="colIdx">
+                   <span>{{col}}</span> 
+                </van-col>
+            </van-row>
         </div>
     </div>
 </template>
@@ -27,6 +31,11 @@ export default {
         }
 
     },
+    computed:{
+        // gameListSource(){
+        //     return this.gameList
+        // }
+    },
     methods: {
         gameStatr() {
             //初始化游戏盘
@@ -36,17 +45,23 @@ export default {
         initGame() {
 
             this.gameList = []
-            for (let i in this.gameLen) {
+            for (let i =0;i< this.gameLen;i++) {
                 console.log(111)
 
                 let col = []
-                for (let j in this.gameLen) {
+                for (let j =0;j< this.gameLen;j++) {
                     col.push(0)
                 }
+            
                 this.gameList.push(col)
             }
-            console.log(this.gameLen)
-            console.log(this.gameList)
+        
+        },
+        test(){
+            let tmp=[0,0,0,0]
+            this.gameList[0][1]=22
+           this. gameList.push(tmp)
+           this. gameList.pop()
         }
     }
 
@@ -65,9 +80,12 @@ export default {
     height: 80px;
     padding-left: 5px;
     padding-top: 5px;
-    background-color: red;
+    
     text-align: center;
     vertical-align: middle;
 
+}
+.box span{
+    line-height: 80px;
 }
 </style>
